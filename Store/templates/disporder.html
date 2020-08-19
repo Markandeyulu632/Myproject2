@@ -1,0 +1,53 @@
+{% extends 'base.html'  %}
+
+{% load static %}
+
+{% block content  %}
+
+<body style="background-color:lightgrey;">
+<h1 style="margin-left:450px;">Order Summary </h1>
+<h3 style="margin-left:350px">
+    User : {{user_name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Status : {{s_status}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    PNumber : {{s_pnumber}}
+</h3>
+<form style="margin-left:250px;">
+    {% csrf_token %}
+    <div class="items-wrapper" style="height:auto;margin-bottom:20px">
+        <div style="margin-top:10px;width:200px;height:auto">
+            <h2>Items</h2> <br>
+            {% for item in s_items %}
+            {{ item }} <br>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top:10px;width:200px;height:auto">
+            <h2>Items Price/kg</h2>   <br>
+            {% for price in s_price %}
+            {{ price }} <br>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top:10px;width:200px;height:auto">
+            <h2>Weight Chosen</h2>  <br>
+            {% for weight in s_weight %}
+            {{ weight }} <br>
+            {% endfor %}
+        </div>
+         <div style="margin-top:10px;width:200px;height:auto">
+            <h2>items cost</h2>   <br>
+            {% for cost in s_cost %}
+            {{ cost }} <br>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="margin-top:10px;width:auto;height:auto">
+        <h2>Total Price &nbsp;&nbsp;{{ total_cost }}</h2>
+    </div>
+
+</form>
+</body>
+
+{% endblock content  %}

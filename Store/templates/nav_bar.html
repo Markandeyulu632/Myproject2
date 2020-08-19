@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'produ' %}">Products & Order</a></li>
+        {% if user.is_superuser %}
+        <li> <a href="{% url 'myorders' %}">CustomerOrders</a></li>
+        {% else %}
+        <li> <a href="{% url 'myorders' %}">MyOrders</a></li>
+        {% endif %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <li><a href='/admin/login/?next=/admin/'>Admin</a></li>
+        {% endif %}
+    </ul>
+{% if user.is_authenticated %}
+<div class="container2"  style="margin-top:1px;margin-left:1200px;width:500px;height:50px;text-transform:uppercase"><h1>Hello &nbsp;{{user}}</h1></div>
+{% endif %}
+{% endblock content %}

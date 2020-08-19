@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'nav_bar.html' %}
+<body style="background-color:lightgrey">
+<div style="margin-left:250px">
+    <form method="POST">
+        {% csrf_token %}
+         <div class="items-wrapper" style="height:auto;margin-bottom:20px">
+             <div style="margin-top:10px;width:200px;height:auto">
+                 <h3> Ordered Number</h3>
+                {% for id in id %}
+                    <a target="_blank" href='{{id}}'>Order No-{{id}}</a>
+                    <br>
+                {% endfor %}
+             </div>
+
+              <div style="margin-top:10px;width:200px;height:auto">
+                  <h3> Ordered User</h3>
+                {% for name in username %}
+                    {{name}}
+                    <br>
+                {% endfor %}
+             </div>
+
+              <div style="margin-top:10px;width:200px;height:auto">
+                  <h3> Date of Order</h3>
+                {% for order in order_date %}
+                    {{order}}
+                    <br>
+                {% endfor %}
+              </div>
+            {% if user.is_superuser %}
+             <div style="margin-top:10px;width:200px;height:auto">
+                 <h3> Status </h3>
+                {% for status in status %}
+                   <select name="status" id="status" style="background-color:lightgrey;" >
+                       <option>{{status}}</option>
+                        <option value="Inprogress">In Progress</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <br>
+                {% endfor %}
+             </div>
+             {% else %}
+              <div style="margin-top:10px;width:200px;height:auto">
+                 <h3> Status </h3>
+                {% for status in status %}
+                   {{status}}
+                  <br>
+                {% endfor %}
+             </div>
+                {% endif %}
+             {% if user.is_superuser %}
+             <div style="margin-top:10px;width:200px;height:auto">
+                 <h3> Can del when complete </h3>
+                {% for id in id %}
+                    <a href='D{{id}}'>Delete</a>
+                    <br>
+                {% endfor %}
+             </div>
+         </div>
+        <input type="submit" value="submit">
+        {% endif %}
+    </form>
+</div>
+</body>
+{% endblock content %}

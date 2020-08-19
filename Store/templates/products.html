@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'nav_bar.html' %}
+<body style="background-color:lightgrey;width=auto;height:auto;">
+<form method="POST" action="{% url 'summary' %}">
+    {% csrf_token %}
+    <div class="items-wrapper">
+         {% for product in products %}
+            <div style="background-color:red;margin-top:50px; width:270px; height:160px;">
+                <img class="resize" src="{{ product.product_image.url }}" title="{{ product.product_name }} 1kg price {{product.product_price}}" alt="{{product.product_price}}"/>
+                <div class="top-left">
+                    <input type="checkbox" id="id_{{ product.product_name }}" name="items_sel" value="{{ product.product_name }}" />
+                    <label for="id_{{ product.product_name }}">{{ product.product_name }}</label>
+                    <label for="id_{{ product.product_name }}">{{ product.product_price }}</label>
+                    <select name="weights" id="id1_{{ product.product_name }}">
+                        {% for num in nums %}
+                            <option>{{num}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>kg</label>
+                    <br>
+                </div>
+            </div>
+         {% endfor %}
+        <br>
+        <br>
+        <div style="margin-top:50px; width:50px; height:auto;">
+            <input style="font-size:20px;margin-left:600px;height:40px;width:75px;background-color:green" type="submit" value="Submit">
+        </div>
+
+        <div style="margin-top:auto;width:0px;height:0px;">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div style="width:1500px;color:red" class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert"><h1>{{ message }}</h1></div>
+                    {% endfor %}
+                {% endif %}
+         </div>
+
+    </div>
+
+</form>
+</body>
+{% endblock %}
+
+

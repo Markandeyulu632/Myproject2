@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+{% include 'nav_bar.html' %}
+<body style="background-color:lightgrey">
+    <div style="background-color:Yellow;margin-left:400px;width:500px;height:500px">
+    <h1>Hello {{last_name}},</h1>
+        <h2>
+        <font style="color:black">
+            Your Registration confirmed with us.<br>
+            Your userid is : <font color="blue" size="6"><b>{{username}}</b></font><br><br>
+
+        Use this userid to login.<br><br>
+        You can continue to order your needs with the registered userid
+        <br><br>
+        You will also receive an email to your register email address
+            from us to confirm the registration
+            <br><br>
+
+    Thank you. <br>
+    Mystore
+        </h2>
+    </div>
+</body>
+
+
+
+
+    </div>
+
+{% endblock content %}
